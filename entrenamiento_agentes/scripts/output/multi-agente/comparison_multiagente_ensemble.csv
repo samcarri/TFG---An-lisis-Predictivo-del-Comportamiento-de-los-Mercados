@@ -1,0 +1,6 @@
+Métrica,Multi-Agente,Ensemble Walk Forward,Mejora (%)
+Accuracy,0.5833,0.6975,+19.58%
+Precisión,0.6,N/A,N/A
+Recall,0.5625,N/A,N/A
+F1-Score,0.5806,0.6993,+20.44%
+Latencia media,94.2 s,N/A,N/A

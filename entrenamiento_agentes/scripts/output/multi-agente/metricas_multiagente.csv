@@ -1,0 +1,6 @@
+Métrica,Valor obtenido
+Accuracy,0.5833
+Precisión,0.6000
+Recall,0.5625
+F1-Score,0.5806
+Latencia media,94.2 s

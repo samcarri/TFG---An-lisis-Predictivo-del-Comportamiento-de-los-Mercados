@@ -1,0 +1,78 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Environment variables
+.env
+
+# Cache
+cache/
+*.cache
+*.db
+
+# Data files (pueden ser grandes)
+data/*.csv
+dumps_data/
+logs/
+
+# Documentation markdowns (generated)
+docs/*.md
+
+# IDE & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Kiro (completo)
+.kiro/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pytest
+.pytest_cache/
+
+# Hypothesis (property-based testing)
+.hypothesis/
+
+# mypy
+.mypy_cache/
+
+# Coverage
+.coverage
+htmlcov/
+
+# Trained models (binarios grandes)
+*.joblib
+*.h5
+*.pkl
+
+# Outputs de entrenamiento (plots, CSVs de resultados)
+**/outputs/

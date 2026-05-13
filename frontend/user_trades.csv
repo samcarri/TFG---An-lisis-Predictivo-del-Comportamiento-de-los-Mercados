@@ -1,0 +1,16 @@
+date,type,ticker,price,quantity,total,notes
+2024-01-15,BUY,NVDA,495.50,10,4955.00,Compra inicial basada en análisis técnico
+2024-02-20,BUY,NVDA,722.48,5,3612.40,Incremento de posición tras resultados positivos
+2024-03-10,SELL,NVDA,875.28,5,4376.40,Toma de beneficios parcial
+2024-04-05,BUY,NVDA,850.00,3,2550.00,Recompra en corrección
+2024-05-12,SELL,NVDA,1064.69,8,8517.52,Venta mayoría de posición
+2024-06-18,BUY,NVDA,118.11,15,1771.65,Compra post-split 10:1
+2024-07-22,BUY,NVDA,117.02,10,1170.20,Acumulación en soporte
+2024-08-15,SELL,NVDA,102.83,10,1028.30,Stop loss activado
+2024-09-10,BUY,NVDA,116.14,12,1393.68,Reentrada tras consolidación
+2024-10-25,BUY,NVDA,140.15,8,1121.20,Compra en breakout
+2024-11-20,SELL,NVDA,145.89,15,2188.35,Realización de ganancias
+2024-12-15,BUY,NVDA,132.50,10,1325.00,Compra fin de año
+2025-01-10,BUY,NVDA,138.75,5,693.75,Incremento posición
+2025-02-05,SELL,NVDA,125.42,10,1254.20,Reducción por volatilidad
+2025-03-01,BUY,NVDA,110.25,15,1653.75,Compra en corrección

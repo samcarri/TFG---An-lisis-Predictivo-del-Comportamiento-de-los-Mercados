@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environment variables
+.env.local
+
+# MacOS
+.DS_Store
+
+# Model outputs and results
+*.pkl
+*.h5
+*.hdf5
+models/
+checkpoints/
+
+# Large data files (opcional, dependiendo de si quieres subir los datos)
+# data/*.csv
+
+# Logs
+*.log
+logs/
+
+# Results and plots (opcional)
+# *.png
+# *.csv
