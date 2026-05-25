@@ -5,24 +5,29 @@ Sistema de análisis financiero basado en agentes LLM (Strands + Ollama qwen2.5:
 ## Inicio Rápido
 
 ```bash
-# 1. Instalar dependencias
+# 1. Instalar dependencias Python
 pip install -r requirements.txt
 
-# 2. Instalar y arrancar Ollama
+# 2. Instalar Ollama desde https://ollama.com/download
+#    y descargar el modelo (4.7 GB):
 ollama pull qwen2.5:7b
-ollama serve
 
-# 3. Configurar credenciales
+# 3. Configurar credenciales (solo necesaria para noticias Alpaca)
 echo "ALPACA_API_KEY=tu_key" > .env
 echo "ALPACA_API_SECRET=tu_secret" >> .env
+echo "REDDIT_USER_AGENT=TFG-NVDA-Collector/1.0 (educational)" >> .env
 
-# 4. Lanzar la aplicación
-cd frontend && ./start.sh
+# 4. Arrancar backend y frontend en dos terminales separadas
+cd frontend && python backend/api.py      # Terminal 1 — puerto 5000
+cd frontend && python server.py           # Terminal 2 — puerto 8080
+
+# 5. Cargar datos iniciales de NVDA (solo la primera vez)
+curl -X POST http://localhost:5000/api/refresh
 ```
 
 Abrir **http://localhost:8080** en el navegador.
 
-> Para instrucciones detalladas de instalación en macOS y Windows, ver [INSTALL.md](INSTALL.md).
+> Para instrucciones detalladas de instalación en macOS y Windows, incluyendo solución de problemas, ver [INSTALL.md](INSTALL.md).
 
 ## Arquitectura
 

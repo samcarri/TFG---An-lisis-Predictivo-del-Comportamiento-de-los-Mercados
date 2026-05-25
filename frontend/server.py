@@ -29,7 +29,7 @@ if __name__ == "__main__":
         print(f"🚀 Servidor iniciado en http://localhost:{PORT}")
         print("="*60)
         print()
-        print("Abre tu navegador en: http://localhost:8000")
+        print("Abre tu navegador en: http://localhost:8080")
         print()
         print("Presiona Ctrl+C para detener el servidor")
         print()
