@@ -179,16 +179,19 @@ async function initDashboard() {
   
   // Event listeners para selector de horizonte de predicción (switch de 3 posiciones)
   const horizonBtns = document.querySelectorAll('.horizon-switch-btn');
-  
+  const slider = document.querySelector('.horizon-switch-slider');
+
+  function moveSlider(position) {
+    if (slider) slider.style.transform = position === 0 ? '' :
+      `translateX(calc(${position * 100}% + ${position * 2}px))`;
+  }
+
   horizonBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Actualizar estado activo
       horizonBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      
-      // Cargar predicción del horizonte seleccionado
-      const horizon = btn.getAttribute('data-horizon');
-      loadEnsembleForecast(horizon);
+      moveSlider(parseInt(btn.getAttribute('data-position')));
+      loadEnsembleForecast(btn.getAttribute('data-horizon'));
     });
   });
 }
