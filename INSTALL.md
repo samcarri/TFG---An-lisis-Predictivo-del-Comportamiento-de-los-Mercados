@@ -276,10 +276,16 @@ Es normal. El walk-forward reentrena el modelo cada 10 pasos. Tiempos típicos:
 
 ## Obtención de API Keys
 
-### Alpaca Markets (noticias financieras)
+### Alpaca Markets (noticias financieras — obligatoria)
 1. Crear cuenta gratuita en [alpaca.markets](https://alpaca.markets/)
 2. Ir a Dashboard → API Keys → Generate New Key
 3. Copiar `API Key ID` y `Secret Key` al `.env`
+
+### GDELT (cobertura mediática global — sin API key)
+GDELT es completamente público. El colector descarga dumps directamente desde `data.gdeltproject.org` sin autenticación. No requiere registro ni credenciales.
+
+### FinBERT (análisis de sentimiento — sin API key)
+El modelo `ProsusAI/finbert` se descarga automáticamente desde Hugging Face la primera vez que se ejecuta. No requiere cuenta ni key. Solo necesita `transformers` y `torch`, que ya están en `requirements.txt`. Se usa para analizar el sentimiento de posts de Reddit.
 
 ### Reddit (opcional — funciona sin auth)
 El scraper usa el JSON público de Reddit sin autenticación OAuth. El `REDDIT_USER_AGENT` es solo para identificar las peticiones y evitar rate limiting.

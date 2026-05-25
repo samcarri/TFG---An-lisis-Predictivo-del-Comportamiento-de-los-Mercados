@@ -134,9 +134,10 @@ pytest tests/debate/ -v -m e2e -s         # Backtesting debate
 | Fuente | Datos | Agente |
 |--------|-------|--------|
 | Yahoo Finance | Precios OHLCV diarios | Market Agent |
-| Alpaca Markets | Noticias financieras | News Agent |
-| GDELT v2 | Cobertura mediática global (tono) | News Agent |
-| Reddit | Posts de r/wallstreetbets, r/stocks, r/investing | Reddit Agent |
+| Alpaca Markets | Noticias financieras (requiere API key) | News Agent |
+| GDELT v2 | Cobertura mediática global — dumps públicos, sin API key | News Agent |
+| Reddit | Posts de r/wallstreetbets, r/stocks, r/investing — sin API key | Reddit Agent |
+| FinBERT (ProsusAI) | Análisis de sentimiento — descarga automática vía Hugging Face | Reddit Agent |
 
 ## Variables de Entorno
 
