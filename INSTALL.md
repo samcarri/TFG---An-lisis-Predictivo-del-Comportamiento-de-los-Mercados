@@ -129,16 +129,21 @@ http://localhost:8080
 
 ### 8. Cargar datos iniciales
 
-La primera vez que se abre la app, los datos financieros de NVDA no existen todavía. Hay dos formas de generarlos:
+El repositorio incluye datos precargados en `data/` (histórico de precios, noticias y Reddit), por lo que la app funciona desde el primer arranque sin configurar ninguna API.
 
-**Opción A — desde el navegador:** hacer clic en el botón "Actualizar datos" del dashboard.
+Si quieres actualizar los datos al día actual, ejecutar:
 
-**Opción B — desde terminal:**
+**Windows:**
 ```powershell
 curl -X POST http://localhost:5000/api/refresh
 ```
 
-Esto descarga automáticamente el histórico de NVDA del último año desde Yahoo Finance y lo guarda en `data/financial_data.csv`. No requiere ninguna API key.
+**macOS/Linux:**
+```bash
+curl -X POST http://localhost:5000/api/refresh
+```
+
+Esto descarga el histórico de NVDA más reciente desde Yahoo Finance.
 
 ---
 
@@ -234,6 +239,8 @@ python3 server.py
 Abrir en el navegador: **http://localhost:8080**
 
 ### 8. Cargar datos iniciales
+
+El repositorio incluye datos precargados en `data/`, por lo que la app funciona desde el primer arranque. Para actualizar al día actual:
 
 ```bash
 curl -X POST http://localhost:5000/api/refresh
@@ -331,3 +338,15 @@ pip install --pre torch --index-url https://download.pytorch.org/whl/nightly/cpu
 
 ### El ensemble forecast no devuelve predicción
 Los modelos `.joblib` están incluidos en el repositorio en `entrenamiento_agentes/trained_models/`. Si faltan, ejecutar los scripts de entrenamiento correspondientes desde `entrenamiento_agentes/scripts/`.
+
+### El ensemble forecast da error 500 con `InconsistentVersionWarning`
+Los modelos `.joblib` se entrenaron con una versión de scikit-learn distinta a la instalada. La solución es reentrenarlos:
+
+```bash
+cd entrenamiento_agentes
+python scripts/news/random_forest/rf_news.py
+python scripts/news/lightGBM/lgbm_news.py
+python scripts/reddit/xgboost/xgb_reddit2.py
+```
+
+Esto regenera los `.joblib` en `trained_models/` con la versión actual de scikit-learn.

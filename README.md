@@ -20,12 +20,11 @@ echo "REDDIT_USER_AGENT=TFG-NVDA-Collector/1.0 (educational)" >> .env
 # 4. Arrancar backend y frontend en dos terminales separadas
 cd frontend && python backend/api.py      # Terminal 1 — puerto 5000
 cd frontend && python server.py           # Terminal 2 — puerto 8080
-
-# 5. Cargar datos iniciales de NVDA (solo la primera vez)
-curl -X POST http://localhost:5000/api/refresh
 ```
 
 Abrir **http://localhost:8080** en el navegador.
+
+> El repositorio incluye datos precargados (`data/financial_data.csv`, `data/nvidia_news_cache.csv`, `data/reddit_processed.csv`) para que la app funcione desde el primer arranque sin necesidad de configurar APIs.
 
 > Para instrucciones detalladas de instalación en macOS y Windows, incluyendo solución de problemas, ver [INSTALL.md](INSTALL.md).
 
@@ -81,8 +80,12 @@ multiagente/
 ├── frontend/
 │   ├── index.html               # SPA principal
 │   ├── js/                      # Módulos JS (chart, chat, news, etc.)
-│   ├── backend/api.py           # Flask API (REST + SSE)
-│   └── start.sh                 # Script de arranque
+│   └── backend/api.py           # Flask API (REST + SSE)
+│
+├── data/                        # Datos en tiempo real (precargados)
+│   ├── financial_data.csv       # Histórico de precios NVDA
+│   ├── nvidia_news_cache.csv    # Caché de noticias Alpaca
+│   └── reddit_processed.csv     # Posts de Reddit procesados
 │
 ├── tests/                       # Tests unitarios, E2E, backtesting
 ├── requirements.txt             # Dependencias Python
