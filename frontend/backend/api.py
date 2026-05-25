@@ -789,7 +789,7 @@ def chat_stream():
             # Emitir eventos conforme llegan
             while True:
                 try:
-                    event = msg_queue.get(timeout=120)
+                    event = msg_queue.get(timeout=300)
                     yield f"data: {_json.dumps(event)}\n\n"
                     if event['type'] == 'done':
                         break
