@@ -311,6 +311,19 @@ El archivo `.env` no existe o las keys no son válidas. Crear el `.env` en la ra
 2. Verificar que el frontend corre en el puerto 8080
 3. Abrir la consola del navegador (F12) para ver errores de red concretos
 
+### La sección News aparece vacía o da error 404
+El apartado de noticias carga desde `data/nvidia_news_cache.csv`, que se genera automáticamente la primera vez que el news agent llama a Alpaca con keys válidas. Sin ese archivo la sección News no muestra nada.
+
+Para generarlo, una vez configuradas las keys de Alpaca en el `.env`, hacer una consulta al news agent desde el chat del frontend, o ejecutar directamente:
+
+```bash
+curl -X POST http://localhost:5000/api/chat \
+  -H "Content-Type: application/json" \
+  -d "{\"message\": \"analiza noticias de NVDA esta semana\", \"agent\": \"news\"}"
+```
+
+Esto descarga y cachea las noticias en `data/nvidia_news_cache.csv`. A partir de ahí la sección News carga correctamente.
+
 ### `torch` no se instala en Mac M1/M2
 ```bash
 pip install --pre torch --index-url https://download.pytorch.org/whl/nightly/cpu
