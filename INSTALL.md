@@ -350,3 +350,18 @@ python scripts/reddit/xgboost/xgb_reddit2.py
 ```
 
 Esto regenera los `.joblib` en `trained_models/` con la versión actual de scikit-learn.
+
+### Cualquier predicción (daily, weekly, monthly) da error `'DecisionTreeClassifier' object has no attribute 'monotonic_cst'`
+Los modelos `.joblib` del repositorio se entrenaron con scikit-learn 1.3.0 y son incompatibles con versiones superiores (1.4+). Hay que reentrenar el modelo que falla según el horizonte:
+
+| Horizonte | Script a ejecutar |
+|-----------|-------------------|
+| Daily (ensemble) | `scripts/news/random_forest/rf_news.py` + `scripts/news/lightGBM/lgbm_news.py` + `scripts/reddit/xgboost/xgb_reddit2.py` |
+| Weekly | `scripts/financial/weekly/rf_weekly_2022.py` |
+| Monthly | `scripts/financial/monthly/xgb_monthly_2022.py` |
+
+Ejecutar desde `entrenamiento_agentes/`:
+```bash
+cd entrenamiento_agentes
+python scripts/financial/weekly/rf_weekly_2022.py
+```
