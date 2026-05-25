@@ -55,6 +55,11 @@ export const api = {
     return r.json();
   },
 
+  async refreshNews() {
+    const r = await fetch(`${API_BASE}/news/refresh`, { method: 'POST' });
+    return r.json();
+  },
+
   async getUserTrades() {
     const r = await fetch(`${API_BASE}/user/trades`);
     return r.json();

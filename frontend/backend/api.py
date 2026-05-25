@@ -304,6 +304,52 @@ def get_news():
         return jsonify({'error': str(e)}), 500
 
 
+@app.route('/api/news/refresh', methods=['POST'])
+def refresh_news():
+    """Descarga noticias desde la última fecha del caché hasta hoy usando Alpaca API."""
+    try:
+        from datetime import date as _date
+        sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
+        news_csv = Path(__file__).parent.parent.parent / 'data' / 'nvidia_news_cache.csv'
+        today = _date.today().strftime('%Y-%m-%d')
+
+        # Determinar fecha de inicio: día siguiente a la última noticia en caché
+        if news_csv.exists() and news_csv.stat().st_size > 0:
+            df_existing = pd.read_csv(news_csv)
+            df_existing['date'] = pd.to_datetime(df_existing['date'], errors='coerce')
+            last_date = df_existing['date'].max()
+            if pd.isna(last_date):
+                start_date = (pd.Timestamp.now() - pd.Timedelta(days=7)).strftime('%Y-%m-%d')
+            else:
+                start_date = (last_date + pd.Timedelta(days=1)).strftime('%Y-%m-%d')
+        else:
+            start_date = (pd.Timestamp.now() - pd.Timedelta(days=7)).strftime('%Y-%m-%d')
+
+        if start_date > today:
+            return jsonify({'success': True, 'message': 'Las noticias ya están al día', 'added': 0})
+
+        from tools.mcp.mcp_news_agent import _fetch_alpaca_and_update_cache
+        df_updated = _fetch_alpaca_and_update_cache('NVDA', start_date, today)
+
+        added = 0
+        if not df_updated.empty:
+            df_updated['date'] = pd.to_datetime(df_updated['date'], errors='coerce')
+            added = int((df_updated['date'] >= pd.Timestamp(start_date)).sum())
+
+        return jsonify({
+            'success': True,
+            'message': f'{added} noticias nuevas añadidas ({start_date} → {today})',
+            'added': added,
+            'start_date': start_date,
+            'end_date': today,
+        })
+
+    except Exception as e:
+        import traceback
+        return jsonify({'success': False, 'error': str(e), 'trace': traceback.format_exc()[-400:]}), 500
+
+
 @app.route('/api/forecast', methods=['GET'])
 def get_forecast():
     """Forecast basado en momentum de los últimos 5 días desde financial_data.csv"""

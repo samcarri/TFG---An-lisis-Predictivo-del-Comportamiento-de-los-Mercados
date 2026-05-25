@@ -76,4 +76,35 @@ export function initNews() {
     const total = Math.ceil(allNews.length / PER_PAGE);
     if (currentPage < total) { currentPage++; renderPage(); }
   });
+
+  document.getElementById('refreshNewsBtn')?.addEventListener('click', async () => {
+    const btn = document.getElementById('refreshNewsBtn');
+    const icon = document.getElementById('refreshNewsIcon');
+    const status = document.getElementById('refreshNewsStatus');
+
+    btn.disabled = true;
+    icon.textContent = '⏳';
+    status.textContent = 'Descargando noticias...';
+
+    try {
+      const result = await api.refreshNews();
+      if (result.success) {
+        status.style.color = '#10b981';
+        status.textContent = result.message;
+        // Recargar la lista si se añadieron noticias
+        if (result.added > 0) {
+          await loadNews();
+        }
+      } else {
+        status.style.color = '#ef4444';
+        status.textContent = result.error || 'Error al actualizar';
+      }
+    } catch (e) {
+      status.style.color = '#ef4444';
+      status.textContent = 'Error de conexión con el backend';
+    } finally {
+      btn.disabled = false;
+      icon.textContent = '🔄';
+    }
+  });
 }
