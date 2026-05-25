@@ -24,14 +24,23 @@ def _get_finbert_pipeline():
     """Obtiene o crea el pipeline de FinBERT (lazy loading)."""
     global _FINBERT_PIPELINE
     if _FINBERT_PIPELINE is None:
-        from transformers import pipeline
+        from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification
+        # Carga explícita del modelo para evitar el bug de meta tensor
+        # con transformers>=4.50 + torch>=2.5 en CPU
+        tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
+        model = AutoModelForSequenceClassification.from_pretrained(
+            MODEL_ID,
+            device_map=None,  # sin device_map para forzar carga directa en CPU
+        )
+        model = model.to("cpu")
         _FINBERT_PIPELINE = pipeline(
             "text-classification",
-            model=MODEL_ID,
-            tokenizer=MODEL_ID,
+            model=model,
+            tokenizer=tokenizer,
             top_k=None,
             truncation=True,
-            max_length=512,  # truncación real se hace antes
+            max_length=512,
+            device="cpu",
         )
     return _FINBERT_PIPELINE
 
