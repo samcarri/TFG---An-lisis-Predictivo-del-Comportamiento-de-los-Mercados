@@ -146,11 +146,15 @@ pytest tests/debate/ -v -m e2e -s         # Backtesting debate
 
 ## Variables de Entorno
 
+Crear el archivo `.env` en la raíz del proyecto:
+
 ```env
-ALPACA_API_KEY=...
-ALPACA_API_SECRET=...
+ALPACA_API_KEY=tu_alpaca_api_key
+ALPACA_API_SECRET=tu_alpaca_api_secret
 REDDIT_USER_AGENT=TFG-NVDA-Collector/1.0 (educational)
 ```
+
+Solo `ALPACA_API_KEY` y `ALPACA_API_SECRET` requieren registro (gratuito en [alpaca.markets](https://alpaca.markets/)). Sin ellas el sistema usa GDELT como fallback. El resto de la app funciona sin ninguna key.
 
 ## Licencia
 

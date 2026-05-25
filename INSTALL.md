@@ -80,8 +80,15 @@ ollama list
 
 ### 5. Configurar variables de entorno
 
-Crear el archivo `.env` en la raíz del proyecto:
+Crear el archivo `.env` en la raíz del proyecto con este contenido exacto:
 
+```env
+ALPACA_API_KEY=tu_alpaca_api_key
+ALPACA_API_SECRET=tu_alpaca_api_secret
+REDDIT_USER_AGENT=TFG-NVDA-Collector/1.0 (educational)
+```
+
+Desde PowerShell:
 ```powershell
 @"
 ALPACA_API_KEY=tu_alpaca_api_key
@@ -89,6 +96,10 @@ ALPACA_API_SECRET=tu_alpaca_api_secret
 REDDIT_USER_AGENT=TFG-NVDA-Collector/1.0 (educational)
 "@ | Out-File -Encoding utf8 .env
 ```
+
+> `ALPACA_API_KEY` y `ALPACA_API_SECRET` son obligatorias para el agente de noticias. Sin ellas, el sistema usa GDELT como fallback automático y el resto de la app funciona con normalidad.
+>
+> `REDDIT_USER_AGENT` puede dejarse tal cual — solo identifica las peticiones al JSON público de Reddit.
 
 Ver sección "Obtención de API Keys" al final de este documento.
 
@@ -187,6 +198,15 @@ ollama pull qwen2.5:7b
 
 ### 6. Configurar variables de entorno
 
+Crear el archivo `.env` en la raíz del proyecto con este contenido exacto:
+
+```env
+ALPACA_API_KEY=tu_alpaca_api_key
+ALPACA_API_SECRET=tu_alpaca_api_secret
+REDDIT_USER_AGENT=TFG-NVDA-Collector/1.0 (educational)
+```
+
+Desde terminal:
 ```bash
 cat > .env << 'EOF'
 ALPACA_API_KEY=tu_alpaca_api_key
@@ -194,6 +214,10 @@ ALPACA_API_SECRET=tu_alpaca_api_secret
 REDDIT_USER_AGENT=TFG-NVDA-Collector/1.0 (educational)
 EOF
 ```
+
+> `ALPACA_API_KEY` y `ALPACA_API_SECRET` son obligatorias para el agente de noticias. Sin ellas, el sistema usa GDELT como fallback automático y el resto de la app funciona con normalidad.
+>
+> `REDDIT_USER_AGENT` puede dejarse tal cual — solo identifica las peticiones al JSON público de Reddit.
 
 ### 7. Iniciar la aplicación
 

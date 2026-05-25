@@ -1,5 +1,6 @@
 # ══════════════════════════════════════════════════════════════
 # Dependencias del Sistema Multi-Agente Financiero — NVDA Trade Dashboard
+# Versiones probadas con Python 3.13.3 en Windows/macOS
 # ══════════════════════════════════════════════════════════════
 
 # ── Core ──────────────────────────────────────────────────────
@@ -17,6 +18,10 @@ strands-agents>=1.0.0
 strands-agents-tools>=0.3.0
 
 # ── Sentiment Analysis (FinBERT) ──────────────────────────────
+# NOTA: transformers>=4.50 con torch>=2.5 en CPU requiere carga explícita
+# del modelo (AutoModelForSequenceClassification) para evitar el bug de
+# meta tensor. El código en tools/sources/shared_sentiment_bert.py ya
+# incluye este fix. No acotar la versión es seguro con el fix aplicado.
 transformers>=4.30.0
 torch>=2.0.0
 
@@ -41,7 +46,7 @@ seaborn>=0.13.0
 pytest>=9.0.0
 hypothesis>=6.0.0
 
-# ── LLM Local (Ollama) ───────────────────────────────────────
+# ── LLM Local (Ollama) ────────────────────────────────────────
 ollama>=0.3.0
 
 # ── Web Framework (Backend API) ───────────────────────────────
